@@ -9,7 +9,7 @@ app.use('/', function (req, res, next) {
 });
 
 app.get('/', function (req, res) {
-    res.send('Hello from Jalapenos!\n ' + new Date());
+    res.send('Hello World!\n ' + new Date());
 });
 
 app.listen(port, ip);
