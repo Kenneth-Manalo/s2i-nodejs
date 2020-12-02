@@ -1,13 +1,15 @@
-const http = require('http');
+var express = require('express'),
+    app = express(),
+    port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || '8080',
+    ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
-const port = 8080;
-
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
+app.use('/', function (req, res, next) {
+    console.log("A new request received at " + Date.now());
+    next();
 });
 
-server.listen(port, () => {
-    console.log(`Server running on port: ${port}`);
+app.get('/', function (req, res) {
+    res.send('Hello from Jalapenos!\n ' + new Date());
 });
+
+app.listen(port, ip);
